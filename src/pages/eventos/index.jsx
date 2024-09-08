@@ -3,21 +3,21 @@ import './index.scss';
 export default function Eventos() {
 
   function clicou() {
-    alert('Oie, o usuario acaba de clikar');
+    alert('Oie, o usuário acaba de clicar');
   }
 
   function MovimentouMouse() {
-    alert('Oie, o usuario acaba de movimentar o mouse');
+    alert('Oie, o usuário acaba de movimentar o mouse');
   }
 
   function alterouValor(e) {
-    e.target.value;
-    alert('Oie, o usuario acaba de auterar o valor do input');
+    let H = e.target.value;
+    alert('Oie, o usuário acaba de alterar o valor do input');
   }
   
   function alterouChecked(e) {
-    e.target.checked;
-    alert('Oie, o usuario acaba de auterar o valor do input');
+    let H = e.target.checked;
+    alert('Oie, o usuário acaba de alterar o valor do input');
   }
  
   return (
@@ -34,7 +34,7 @@ export default function Eventos() {
 
         <input onChange={alterouValor} type='text' placeholder= 'Digite aqui alguma coisa' ></input>
 
-        <textarea onChange={alterouValor} placehoder='Diite Aqui' ></textarea>
+        <textarea onChange={alterouValor} placehoder='Digite Aqui' ></textarea>
 
         
       <selection onChange={alterouValor} >
