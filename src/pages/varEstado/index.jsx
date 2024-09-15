@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { tratarNumeros } from '../../Utils/conversão.js';
 
 export default function VarEstado() {
+
   const [ contador, setContador ] = useState(0);
   const [ tituloS2, setTituloS2 ] = useState('Oie');
   const [ tituloS3, setTituloS3 ] = useState('Escolha um Item');
@@ -19,8 +20,15 @@ export default function VarEstado() {
   const [cupom, setCupom] = useState('');
   const [totalIng, setTotalIng] = useState(0);
 
-  const [ novaMeta, setNovaMeta ] = useState;
-  const [ listaMetas, setListaMetas  ] = useState;
+  const [ novaMeta, setNovaMeta ] = useState('');
+  const [ listaMetas, setListaMetas ] = useState([]);
+  const [ editando, setEditando ] = useState(-1);
+  const [ frufru, setFrufru ] = useState('Adicionar');
+
+  const [ plano, setPlano ] = useState('');
+  const [ situacao, setSituacao ] = useState('');
+  const [ cor, setCor ] = useState('');
+  const [ listaPlanos, setListaPlanos ] = useState([]);
   
   
   function somar() {
@@ -33,7 +41,6 @@ export default function VarEstado() {
       setContador(contador++);
     }
   }
-  
   function diminuir(){
     if ( contador > 0 ) {
       setContador(contador--);
@@ -62,27 +69,110 @@ export default function VarEstado() {
   }
 
   function adicionarMeta() {
-    setListaMetas([...listaMetas, novaMeta]);
+
+    if ( novaMeta != '' ) {
+
+      if ( editando == -1 ) {
+        setListaMetas([...listaMetas, novaMeta]);
+        setNovaMeta('');  
+      }
+      else {
+        listaMetas[editando] = novaMeta;
+        setListaMetas([...listaMetas]);
+        setNovaMeta('');
+        setEditando(-1);
+        setFrufru('Adicionar');
+        
+      }
+      
+    }
+  }
+  function teclaApertada(e) {
+    if ( e.key == 'Enter' ) {
+      adicionarMeta();
+
+    }
+  }
+  function removerMeta(pos) {
+    listaMetas.splice( pos, 1 );
+    setListaMetas([...listaMetas]);
+  }
+  function alterarMeta(pos) {
+    setNovaMeta(listaMetas[pos]);
+    setEditando(pos);
+    setFrufru('Editar');
   }
   
+  function adicionarPlano() {
+    let novoPlano = {
+      titulo: plano,
+      tempo: situacao,
+      tema: cor
+    };
+
+    setListaPlanos([...listaPlanos, novoPlano]);
+
+    setPlano('');
+    setSituacao('');
+    setCor('');
+  }
+
+
   return (
     <div className='pagina-varestado pagina' >
       <header className='cabecalho' >
         <h1> ReactJS | Variável de Estado </h1>
       </header>
 
+      <div className="secao planos">
+        <h1>Meu planos atuais</h1>
+
+        <div calssNmae='entrada' >
+          <input type="text" placeholder="Meu plano aqui" value={plano} onChange={ (e) => setPlano(e.target.value) } />
+        
+          <input type="text" placeholder="Situação do plano aqui" value={situacao} onChange={ (e) => setSituacao(e.target.value) } />
+          
+          <input type="text" placeholder="Cor de identificação" value={cor} onChange={ (e) => setCor(e.target.value) } />
+          
+          <button onClick={adicionarPlano} > Adicionar plano </button>
+          </div>
+
+          <div className="lista">
+            {listaPlanos.map( ( item, pos ) => 
+
+              <div calssName='plano' key={pos} >
+                <div className='cor' style={{ background: item.tema }} >&nbsp;</div>
+                  <div>
+                    <h1> { item.titulo } </h1>
+
+                    <h2> { item.tempo } </h2>
+                  </div>
+              </div>
+
+              )}
+            
+          </div>
+      </div>
+
       <div classname='secao metas' >
         <h1> Metas para os próximos 5 anos </h1>        
 
         <div calssName='entrada' >
-          <input type='text' placeholder='Digite sua meta aqui' value={novaMeta} onChange={(e) => setNovaMeta(e.target.value)} />
+          <input type='text' placeholder='Digite sua meta aqui' value={novaMeta} onKeyUp={teclaApertada} onChange={(e) => setNovaMeta(e.target.value)} />
 
-          <button onClick={adicionarMeta} > Adicionar </button>
+          <button onClick={adicionarMeta} > {frufru} </button>
         </div>
 
         <ul>
-          <li> Se tornar pleno em uma empresa </li>
-          <li> Dar entrada no meu carro </li>
+          {listaMetas.map( ( item, pos ) =>
+            <li key={pos} >
+              <i className='fa fa-pen-to-square' onClick={ () => alterarMeta(pos) } ></i> &nbsp;
+
+              <i className='fa fa-trash-can' onClick={() => removerMeta(pos) } ></i> &nbsp;
+
+              {item}
+            </li>
+           )}
         </ul>        
       </div>
 
