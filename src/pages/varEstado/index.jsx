@@ -62,8 +62,7 @@ export default function VarEstado() {
   }
 
   function adicionarMeta() {
-
-    
+    setListaMetas([...listaMetas, novaMeta]);
   }
   
   return (
