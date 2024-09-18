@@ -1,0 +1,60 @@
+.pagina-rende-cond {
+
+    .filmes {
+
+        .lista {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          margin-top: 40px;
+        }
+    
+        .entradas {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          gap: 20px;
+          
+        }
+    
+        .c-l {
+          background-color: #28b31e;
+        }
+        .c-10 {
+          background-color: #0171A4;
+        }
+        .c-12, .c-14 {
+          background-color: #ebe22f;
+        }
+        .c-16 {
+          background-color: #dc3131;
+        }
+        .c-18 {
+          background-color: #000;
+        }
+    
+      }
+
+      .estreia {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 10px; 
+        border-radius: 100px;
+        background-color: #3a3a3a;
+        color: #fff;
+        font: 500 16px 'Poppins';
+
+      }
+
+      .estrela {
+        color: #ebe22f;
+      }
+
+    .msg-biscoito {
+        font: 600 italic 28px 'Poppins';
+        text-align: center;
+        margin: 20px;
+    }
+}

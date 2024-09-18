@@ -1,31 +1,18 @@
 import './index.scss';
 
 import { Link } from 'react-router-dom';
+import Cabecalho from '../../components/cabecalho';
 
-export default function App() {
+export default function Contato() {
   return (
-    <div className="pagina-app pagina">
-      <header className='cabecalho' >
-        
-        <h1 className='titulo1' > Estudos de ReactJS</h1>
-  
-      </header>
-
-      <section>
-        
-        <ul>
-          <li> 
-            <Link to = '/contato' > Ir para Contato </Link>
-          </li>
-          <li> 
-            <Link to = '/eventos' > Ir para Eventos </Link>
-          </li>
-          <li> 
-            <Link to = '/varestado' > Ir para Variável de Estado </Link>
-          </li>
-        </ul>
-
-      </section>
-    </div>
-  );
+    <div className='pagina-contato pagina'>
+      < Cabecalho titulo='Contato' />
+      
+      <h1>Contato</h1>  
+      
+      <img src='/assets/images/179871.png' alt='https://cdn-icons-png.flaticon.com/512/179/179871.png' />
+      
+      <Link to = '/' >Pagina Inicial</Link>
+    </div>    
+  )
 }

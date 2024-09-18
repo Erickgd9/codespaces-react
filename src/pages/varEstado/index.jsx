@@ -1,10 +1,12 @@
 import './index.scss';
 import { useState } from 'react';
 import { tratarNumeros } from '../../Utils/conversão.js';
+import Cabecalho from '../../components/cabecalho/index.jsx';
+import calculatTotalIngresso from '../../services/ingresso.js';
 
 export default function VarEstado() {
 
-  const [ contador, setContador ] = useState(0);
+  const [ contador, setContador ] = useState(1);
   const [ tituloS2, setTituloS2 ] = useState('Oie');
   const [ tituloS3, setTituloS3 ] = useState('Escolha um Item');
   const [ marcouOpcaoS4, setmarcouOpcaoS4] = useState(true);
@@ -48,23 +50,7 @@ export default function VarEstado() {
   }
 
   function calcularIngresso() {
-    let tot = 0;
-
-    if ( meioIng == true ) {
-      tot = ( qtdIng * 15.00 );
-
-    }
-    else {
-      tot = ( qtdIng * 30.00 );
-      
-    }
-
-    if ( cupom == 'QUERO50' ) {
-      let desc = tot * 50 / 100;
-      tot -= desc;
-      
-    }
-
+    let tot = calculatTotalIngresso( meioIng, qtdIng, cupom );
     setTotalIng(tot);
   }
 
@@ -120,14 +106,12 @@ export default function VarEstado() {
 
   return (
     <div className='pagina-varestado pagina' >
-      <header className='cabecalho' >
-        <h1> ReactJS | Variável de Estado </h1>
-      </header>
+      < Cabecalho titulo='Variaveis de Estado' />
 
       <div className="secao planos">
         <h1>Meu planos atuais</h1>
 
-        <div calssNmae='entrada' >
+        <div className='entrada' >
           <input type="text" placeholder="Meu plano aqui" value={plano} onChange={ (e) => setPlano(e.target.value) } />
         
           <input type="text" placeholder="Situação do plano aqui" value={situacao} onChange={ (e) => setSituacao(e.target.value) } />
@@ -140,7 +124,7 @@ export default function VarEstado() {
           <div className="lista">
             {listaPlanos.map( ( item, pos ) => 
 
-              <div calssName='plano' key={pos} >
+              <div className='plano' key={pos} >
                 <div className='cor' style={{ background: item.tema }} >&nbsp;</div>
                   <div>
                     <h1> { item.titulo } </h1>
@@ -154,10 +138,10 @@ export default function VarEstado() {
           </div>
       </div>
 
-      <div classname='secao metas' >
+      <div className='secao metas' >
         <h1> Metas para os próximos 5 anos </h1>        
 
-        <div calssName='entrada' >
+        <div className='entrada' >
           <input type='text' placeholder='Digite sua meta aqui' value={novaMeta} onKeyUp={teclaApertada} onChange={(e) => setNovaMeta(e.target.value)} />
 
           <button onClick={adicionarMeta} > {frufru} </button>
@@ -213,7 +197,7 @@ export default function VarEstado() {
         </div>
       </div>
       
-      <div clasName='secao calculadora' >
+      <div className='secao calculadora' >
         <h1> Calculadora </h1>
   
         <div className='entrada' >
@@ -229,7 +213,7 @@ export default function VarEstado() {
         <button onClick={somar} > Somar </button>
       </div>
 
-      <div clasName='secao' >
+      <div className='secao' >
         <h1> Contador </h1>
 
         <div className='cont' >
