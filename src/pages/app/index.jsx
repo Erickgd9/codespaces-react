@@ -8,7 +8,9 @@ export default function App() {
     <div className="pagina-app pagina">
       < Cabecalho titulo="Main Page" />
 
-      <section>
+      <section className='secao' >
+        <h1> Temas </h1>
+        
         <ul>
           <li> 
             <Link to = '/contato' > Ir para Contato </Link>
@@ -32,6 +34,10 @@ export default function App() {
 
           <li>
             <Link to = '/efeitos' > Ir para Efeitos </Link>
+          </li>
+
+          <li>
+            <Link to = '/chamadaapi' > Ir para Chamada API </Link>
           </li>
         </ul>
       </section>
